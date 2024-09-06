@@ -58,7 +58,7 @@ export function convertType(type: any, data?: any): any {
   // Handle primitive types directly
   return type;
 }
-export function convertTypes1ToTypes2(data: any): any {
+export function anchorIDLConvertNewToOld(data: any): any {
   return {
     version: data.metadata.version,
     name: data.metadata.name,
