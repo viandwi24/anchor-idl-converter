@@ -1,7 +1,5 @@
-import fs from 'fs'
-import path from 'path'
-import { type Root as Type1Root } from './types/anchor_new'
-import { type Root as Type2Root } from './types/anchor_old'
+import { type Root as AnchorIDLNew } from './types/anchor_new'
+import { type Root as AnchorIDLOld } from './types/anchor_old'
 
 export const convertSnakeCaseToCamelCase = (str: string) => {
   // ex: create_item_collection -> createItemCollection
@@ -58,32 +56,32 @@ export function convertType(type: any, data?: any): any {
   // Handle primitive types directly
   return type;
 }
-export function anchorIDLConvertNewToOld(data: any): any {
+export function anchorIDLConvertNewToOld(data: AnchorIDLNew): AnchorIDLOld {
   return {
     version: data.metadata.version,
     name: data.metadata.name,
-    instructions: data.instructions.map((instruction: any) => ({
+    instructions: data.instructions.map((instruction) => ({
       name: convertSnakeCaseToCamelCase(instruction.name),
-      accounts: instruction.accounts.map((account: any) => ({
+      accounts: instruction.accounts.map((account) => ({
         name: convertSnakeCaseToCamelCase(account.name),
         isMut: account.writable || false,
         isSigner: account.signer || false,
       })),
-      args: instruction.args.map((arg: any) => ({
+      args: instruction.args.map((arg) => ({
         name: convertSnakeCaseToCamelCase(arg.name),
         type: convertType(arg.type, data),
       })),
     })),
-    accounts: data.accounts.map((account: any) => ({
+    accounts: data.accounts.map((account) => ({
       name: account.name,
-      type: convertType(data.types.find((type: any) => type.name === account.name)?.type, data),
+      type: convertType(data.types.find((type) => type.name === account.name)?.type, data),
     })),
-    types: data.types.map((type: any) => ({
+    types: data.types.map((type) => ({
       name: type.name,
       type: convertType(type.type),
     })),
-    errors: data.instructions.flatMap((instruction: any) => 
-      instruction.args.filter((arg: any) => arg.type.kind === 'error').map((arg: any) => ({
+    errors: data.instructions.flatMap((instruction) => 
+      instruction.args.filter((arg) => arg.type.kind === 'error').map((arg) => ({
         code: 0, // Placeholder, as there are no codes in the example.
         name: arg.name,
         msg: 'Error message' // Placeholder, as there are no error messages in the example.
@@ -94,11 +92,3 @@ export function anchorIDLConvertNewToOld(data: any): any {
     },
   };
 }
-
-
-// const targetIDL = NokishiftIDL
-// const convertedIDL = convertTypes1ToTypes2(targetIDL)
-
-// const convertedIDLPath = path.join(__dirname, 'idl-converted.json')
-// fs.writeFileSync(convertedIDLPath, JSON.stringify(convertedIDL, null, 2))
-// console.log('convertedIDLPath', convertedIDLPath)
