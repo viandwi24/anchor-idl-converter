@@ -1,7 +1,7 @@
 {
   "name": "anchor-idl-converter",
   "description": "Converter for Anchor IDL, convert your IDL from anchor new version to old version",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "keywords": [
     "anchor",
     "solana",
@@ -29,6 +29,12 @@
   ],
   "bin": {
     "anchor-idl-converter": "src/bin.ts"
+  },
+  "exports": {
+    "bun": "./src/index.ts"
+  },
+  "engines": {
+    "bun": ">=1"
   },
   "homepage": "https://github.com/viandwi24/anchor-idl-converter",
   "license": "ISC",

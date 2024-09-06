@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 import path from 'path'
 import fs from 'fs'
 import { Command } from 'commander'
@@ -5,7 +6,7 @@ import { anchorIDLConvertNewToOld } from './'
 export * from './'
 
 const program = new Command()
-  .version('0.0.1')
+  .version('0.0.3')
   .description('converter anchor idl')
 
 program.command('to-old')

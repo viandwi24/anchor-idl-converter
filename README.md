@@ -3,6 +3,9 @@ Converter for Anchor IDL, convert your IDL from anchor new version to old versio
 
 This is a simple tool i made to convert new Anchor IDL (anchor v0.30.0+) to old Anchor IDL (anchor v0.29.0-). Im using this tool because some another tools like SolanaFM Local IDL until now still not support the new Anchor IDL.
 
+> [!WARNING]  
+> This tools is only hacky solution, and may not work for all cases.
+
 ## How to use
 ```bash
 # use with bun
